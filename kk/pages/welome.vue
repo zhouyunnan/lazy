@@ -12,6 +12,21 @@ export default {
 	data() {
 		return {};
 	},
+	onLoad() {
+		
+	},
+	mounted() {
+		
+		// uni.switchTab({
+		//     url: '/pages/index/index'
+		// });
+		
+		//选择学校
+		uni.redirectTo({
+		    url: '/pages/xuanzheschool'
+		});
+		
+	},
 	methods: {}
 };
 </script>
@@ -36,15 +51,15 @@ export default {
 	height: $h;
 }
 .wz {
-	@include imgpos(491rpx, 241rpx, url(../../static/images/gaoxiaosh.png));
+	@include imgpos(491rpx, 241rpx, url(../static/images/gaoxiaosh.png));
 	top: 30rpx;
 }
 .wz2 {
-	@include imgpos(445rpx, 43rpx, url(../../static/images/sange_07.png));
+	@include imgpos(445rpx, 43rpx, url(../static/images/sange_07.png));
 	top: 380rpx;
 }
 .wz3 {
-	@include imgpos(424rpx, 77rpx, url(../../static/images/lahz_11.png));
+	@include imgpos(424rpx, 77rpx, url(../static/images/lahz_11.png));
 	top:500rpx;
 }
 .paonan{

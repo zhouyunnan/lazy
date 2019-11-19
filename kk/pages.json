@@ -1,22 +1,59 @@
 {
-	"pages": [ 
-		// {
-		// 	"path": "pages/index/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "uni-app"
-		// 	}
-		// },
+	"pages": [{
+			"path": "pages/welome",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#4D9BEA",
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+
+			}
+		},
 		{
 			"path": "pages/demo/demo",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/xuanzheschool",
+			"style": {
+				"navigationBarTitleText": "选择所在学校",
+				"disableScroll":true
 			}
 		}
-    ],
+	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#FF507D",
+		"backgroundColor": "#F8F8F8",
+		"navigationBarTitleText": "懒癌患者拯救联盟"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#4D9BEA",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"iconPath": "static/images/02.png",
+			"selectedIconPath": "static/images/tubiaozhizuomoban_2.png",
+			"pagePath": "pages/index/index",
+			"text": "历史"
+		}, {
+			"selectedIconPath": "static/images/tubiaozhizuomoban_1.png",
+			"iconPath": "static/images/03.png",
+			"pagePath": "pages/demo/demo",
+			"text": "立即下单"
+		}, {
+			"selectedIconPath": "static/images/tubiaozhizuomoban.png",
+			"iconPath": "static/images/01.png",
+			"pagePath": "pages/demo/demo",
+			"text": "我的"
+		}]
 	}
+
 }
