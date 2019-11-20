@@ -1,5 +1,6 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/welome",
 			"style": {
 				"navigationBarTextStyle": "white",
@@ -8,22 +9,38 @@
 			}
 		},
 		{
+			"path": "pages/Dingdan/list",
+			"style": {
+					"navigationBarTitleText": "订单",
+					"disableScroll": true
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
-
+					"navigationBarTitleText": "懒癌患者拯救联盟",
+					"disableScroll": true
 			}
 		},
 		{
-			"path": "pages/demo/demo",
+			"path": "pages/My/index",
 			"style": {
-				"navigationBarTitleText": ""
+					"navigationBarTitleText": "我的",
+					"disableScroll": true
 			}
 		},
 		{
-			"path": "pages/xuanzheschool",
+			"path": "pages/school/xuanzheschool",
 			"style": {
 				"navigationBarTitleText": "选择所在学校",
-				"disableScroll":true
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/school/schoollist",
+			"style": {
+				"navigationBarTitleText": "已开通学校",
+				"disableScroll": true
 			}
 		}
 	],
@@ -34,26 +51,29 @@
 		"navigationBarTitleText": "懒癌患者拯救联盟"
 	},
 	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#4D9BEA",
-		"borderStyle": "black",
+		"color": "#a2a2a2",
+		"selectedColor": "#FF507D",
+		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
-		"list": [{
-			"iconPath": "static/images/02.png",
-			"selectedIconPath": "static/images/tubiaozhizuomoban_2.png",
-			"pagePath": "pages/index/index",
-			"text": "历史"
-		}, {
-			"selectedIconPath": "static/images/tubiaozhizuomoban_1.png",
-			"iconPath": "static/images/03.png",
-			"pagePath": "pages/demo/demo",
-			"text": "立即下单"
-		}, {
-			"selectedIconPath": "static/images/tubiaozhizuomoban.png",
-			"iconPath": "static/images/01.png",
-			"pagePath": "pages/demo/demo",
-			"text": "我的"
-		}]
+		"list": [
+			{
+				"iconPath": "static/images/02.png",
+				"selectedIconPath": "static/images/tubiaozhizuomoban_2.png",
+				"pagePath": "pages/Dingdan/list",
+				"text": "订单"
+			},
+			{
+				"selectedIconPath": "static/images/tubiaozhizuomoban_1.png",
+				"iconPath": "static/images/03.png",
+				"pagePath": "pages/index/index",
+				"text": "立即下单"
+			},
+			{
+				"selectedIconPath": "static/images/tubiaozhizuomoban.png",
+				"iconPath": "static/images/01.png",
+				"pagePath": "pages/My/index",
+				"text": "我的"
+			}
+		]
 	}
-
 }
