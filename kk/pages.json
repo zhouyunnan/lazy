@@ -42,6 +42,20 @@
 				"navigationBarTitleText": "已开通学校",
 				"disableScroll": true
 			}
+		},
+		{
+			"path": "pages/My/dizhi",
+			"style": {
+				"navigationBarTitleText": "管理收货地址",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/My/adddizhi",
+			"style": {
+				"navigationBarTitleText": "添加收货地址",
+				"disableScroll": true
+			}
 		}
 	],
 	"globalStyle": {

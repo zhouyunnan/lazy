@@ -20,10 +20,12 @@ export default {
 		    url: '/pages/index/index'
 		});
 		
-		//选择学校
+		// 选择学校
 		// uni.redirectTo({
 		//     url: '/pages/school/xuanzheschool'
 		// });
+				
+	
 		
 	},
 	methods: {}

@@ -117,6 +117,7 @@ export default {
     padding-bottom: 30rpx;
     line-height: 1.5;
     text-align: justify;
+    color: #696868;
   }
 }
 .xiadan {

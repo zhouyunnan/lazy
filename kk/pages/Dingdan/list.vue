@@ -307,7 +307,7 @@ export default {
       line-height: 70rpx;
       font-size: 32rpx;
       transform: translateX(-50%);
-      color: #818181;
+      color: #696868;
     }
     .boddr {
       border-bottom: 4rpx solid #474747;
