@@ -12,7 +12,7 @@
 			"path": "pages/Dingdan/list",
 			"style": {
 					"navigationBarTitleText": "订单",
-					"disableScroll": true
+					"enablePullDownRefresh":true
 			}
 		},
 		{
@@ -47,7 +47,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FF507D",
-		"backgroundColor": "#F8F8F8",
+		"backgroundColor": "#F0F0F0",
 		"navigationBarTitleText": "懒癌患者拯救联盟"
 	},
 	"tabBar": {
