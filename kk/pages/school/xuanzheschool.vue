@@ -4,31 +4,15 @@
       <view class="w">
         <view class="dw_fle">
           <view>当前定位:</view>
-          <view>{{province}} · {{city}}</view>
+          <view>{{city}} · {{district}}</view>
           <view @click="getaddress()">[重新获取]</view>
         </view>
       </view>
     </view>
-    <view class="school_">
+    <view class="school_" v-for="(school,key) in schools" :key="key" @click="qrschool(school.id)">
       <view class="w">
-        <view class="box_">
-          <view>海南热带海洋学院</view>
-          <view></view>
-        </view>
-      </view>
-    </view>
-    <view class="school_">
-      <view class="w">
-        <view class="box_">
-          <view>海南热带海洋学院</view>
-          <view></view>
-        </view>
-      </view>
-    </view>
-    <view class="school_">
-      <view class="w">
-        <view class="box_" style="border-bottom:none">
-          <view>海南热带海洋学院</view>
+        <view class="box_" :class="{disborder:key == schools.length-1}">
+          <view>{{school.schoolname}}</view>
           <view></view>
         </view>
       </view>
@@ -44,19 +28,47 @@
 export default {
   data() {
     return {
-      province: "遵义市",
-      city: "播州区"
-    }; 
+      city: "遵义市",
+      district: "播州区",
+      schools: ""
+    };
+  },
+  onLoad() {
+    let city = uni.getStorageSync("city");
+    let district = uni.getStorageSync("district");
+    if (!this.myconfig.isnull(city)) {
+      this.city = city;
+    }
+    if (!this.myconfig.isnull(district)) {
+      this.district = district;
+    }
   },
   watch: {
-    province() {
-      this.getschool_msl();
-    },
     city() {
       this.getschool_msl();
     }
   },
   methods: {
+    //选定学校
+    qrschool(val) {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xlogin/save_school",
+        data: {
+          school_id: val
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          uni.setStorageSync("school_id", val);
+          uni.switchTab({
+            url: "/pages/index/index"
+          });
+        }
+      });
+    },
     linkschool_() {
       uni.navigateTo({
         url: "/pages/school/schoollist"
@@ -64,10 +76,22 @@ export default {
     },
     //根据地理位置查询开通的学校
     getschool_msl() {
-          // uni.showLoading({
-          //   title: "查询中..",
-          //   mask: true
-          // });
+      let { city, district } = this;
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xlogin/save_wz",
+        data: {
+          city,
+          district
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          this.schools = res.data.lists;
+        }
+      });
     },
     //获取地理位置授权
     opauthoriz() {
@@ -110,9 +134,9 @@ export default {
               if (re.status == 0) {
                 let dizhi_re = re.result;
                 let address_component = dizhi_re["address_component"];
-                let province = address_component["province"];
+                let district = address_component["district"];
                 let city = address_component["city"];
-                thiz.province = province;
+                thiz.district = district;
                 thiz.city = city;
               } else {
                 uni.showToast({
@@ -259,5 +283,8 @@ export default {
     color: rgb(25, 88, 156);
     margin-left: 10rpx;
   }
+}
+.disborder {
+  border-bottom: none !important;
 }
 </style>

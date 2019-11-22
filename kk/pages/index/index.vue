@@ -1,24 +1,20 @@
 <template>
   <view>
     <view class="top_">
-      <view class="school" @click="linkschool_()">海南热带海洋学院</view>
+      <view class="school" @click="linkschool_()">{{school_data.schoolname}}</view>
     </view>
-    <view class="yysj">
-      <view class="w">接单时间：08.00 - 12.30</view>
+    <view class="yysj" v-if="school_data.yingyezt == 'true'">
+      <view class="w">接单时间：{{school_data.jiedanshijian}} - {{school_data.guandianshijian}}</view>
     </view>
     <view class="lxdh">
       <view class="w">
         联系电话：
-        <text @click="call()">17600664494</text>
+        <text @click="call()">{{school_data.phone}}</text>
       </view>
     </view>
     <view class="gg_">
-      <view class="tit">联盟公示</view>
-      <view class="msg">
-        abbar 的默认高度，在不同平台不一样。App端的默view
-        认高度在HBuilderX 2.3.4起从56px调整为50px，与H5端统
-        一。开发者也可以自行设定高度，调回56px
-      </view>
+      <view class="tit">联盟公告</view>
+      <view class="msg">{{school_data.gonggao}}</view>
     </view>
     <view class="xiadan">
       <text>立即下单</text>
@@ -27,6 +23,43 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      school_id: "",
+      school_data:""
+    };
+  },
+  onShow() {
+    let school_id = uni.getStorageSync("school_id");
+    if (this.myconfig.isnull(school_id)) {
+      this.linkschool_();
+    } else {
+      this.school_id = school_id;
+    }
+  },
+  watch: {
+    school_id() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xrunman/find_byid",
+        data: {
+          school_id:this.school_id
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+         let re = res.data;
+         if(re.result){
+            this.school_data = re.content;
+         }else{
+            this.linkschool_();
+         }
+        }
+      });
+    }
+  },
   methods: {
     linkschool_() {
       uni.navigateTo({
@@ -35,7 +68,7 @@ export default {
     },
     call() {
       uni.makePhoneCall({
-        phoneNumber: "17600664494" //仅为示例
+        phoneNumber: this.school_data.phone
       });
     }
   }

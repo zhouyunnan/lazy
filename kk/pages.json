@@ -18,15 +18,13 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-					"navigationBarTitleText": "懒癌患者拯救联盟",
-					"disableScroll": true
+					"navigationBarTitleText": "懒癌患者拯救联盟"
 			}
 		},
 		{
 			"path": "pages/My/index",
 			"style": {
-					"navigationBarTitleText": "我的",
-					"disableScroll": true
+					"navigationBarTitleText": "我的"
 			}
 		},
 		{
