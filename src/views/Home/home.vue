@@ -44,6 +44,8 @@
           <div class="pub_right_header_ty" @click="changgepwd()">
             <span class="iconfont icon-shezhi"></span>修改密码
           </div>
+          <div class="pub_right_header_ty">学校：{{schoolname}}
+          </div>
         </div>
       </div>
       <div class="pub_right_content">
@@ -68,8 +70,12 @@ export default {
         index: 0,
         father_index: 0,
         jb: 1
-      }
+      },
+      schoolname:""
     };
+  },
+  created(){
+    this.schoolname =  sessionStorage.getItem("schoolname");
   },
   components: {
     Welcome

@@ -100,6 +100,8 @@ export default {
               message: re.msg,
               type: "success"
             });
+            sessionStorage.setItem("schoolname",re.content.schoolname);
+            
             let thiz = this;
             setTimeout(function() {
               let querypath = thiz.$route.query;
@@ -114,6 +116,8 @@ export default {
                 });
               }
             }, 1500);
+
+
           } else {
             this.$message.error(re.msg);
             return;

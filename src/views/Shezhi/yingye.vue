@@ -17,6 +17,14 @@
       </div>
     </div>
     <div class="gonggao_">
+      <div class="tit">手机号设置</div>
+      <div class="msg">该手机号会展示在小程序下单页面，方便客户与你联系</div>
+      <div class="content">
+        <el-input type="input" placeholder="请输入内容" v-model="phone"></el-input>
+        <el-button type="primary" @click="updata_phone()">保存</el-button>
+      </div>
+    </div>
+    <div class="gonggao_">
       <div class="tit">店铺公告</div>
       <div class="msg">展示在店铺首页的公告，你可以用来设置展示收费标准</div>
       <div class="content">
@@ -64,7 +72,8 @@ export default {
       zt: "",
       load: "",
       dialogFormVisible: false,
-      gonggao: ""
+      gonggao: "",
+      phone: ""
     };
   },
   created() {
@@ -101,6 +110,39 @@ export default {
     }
   },
   methods: {
+    updata_phone() {
+      this.$http
+        .post(
+          "/index.php/home/Run/set",
+          this.$qs.stringify({
+            phone: this.phone
+          })
+        )
+        .then(response => {
+          let res = response.data;
+          if (res.result) {
+            this.begin = false;
+            this.find();
+            this.$notify({
+              title: "成功",
+              message: "设置成功",
+              type: "success"
+            });
+          } else {
+            this.$notify.error({
+              title: "警告",
+              message: res.msg
+            });
+          }
+        })
+        .catch(() => {
+          this.$notify.error({
+            title: "错误",
+            message: "网路错误"
+          });
+        });
+    },
+
     updata_yyzt(val) {
       this.$http
         .post(
@@ -146,6 +188,7 @@ export default {
             this.startTime = res.content.jiedanshijian;
             this.endTime = res.content.guandianshijian;
             this.gonggao = res.content.gonggao;
+            this.phone = res.content.phone;
             if (res.content.yingyezt == "true") {
               this.zt = true;
             } else {
@@ -312,8 +355,7 @@ export default {
 }
 .gonggao_ {
   width: 100%;
-  height: 200px;
-  margin-top: 10px;
+  margin-top: 20px;
   .tit {
     font-size: 16px;
     line-height: 2;

@@ -239,19 +239,6 @@ export default {
           });
         });
     }
-  },
-  beforeRouteLeave(to, from, next) {
-    this.$confirm("你对表单的改动都保存了吗?", "提示", {
-      confirmButtonText: "是",
-      cancelButtonText: "取消",
-      type: "warning"
-    })
-      .then(() => {
-        next();
-      })
-      .catch(() => {
-        return;
-      });
   }
 };
 </script>
