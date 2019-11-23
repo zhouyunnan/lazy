@@ -58,7 +58,7 @@
     "mp-weixin" : {
         "appid" : "wx72159bc61378386d",
         "setting" : {
-            "urlCheck" : true,
+            "urlCheck" : false,
             "es6" : true,
             "postcss" : true,
             "minified" : true
@@ -66,7 +66,7 @@
         "usingComponents" : true,
         "permission" : {
             "scope.userLocation" : {
-                "desc" : "我们可以根据您所在的位置，快速找到您所在的学校"
+                "desc" : "找到你附近开通此服务的学校"
             }
         }
     },
