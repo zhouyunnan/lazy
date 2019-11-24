@@ -3,7 +3,7 @@ import App from './App'
 
 Vue.config.productionTip = false
 Vue.prototype.myconfig =  {
-	"url":"http://127.0.0.1/",
+	"url":"https://api.doudianwang.com/lazy/",
 	"imgurl":"https://api.doudianwang.com/admin",
 	isnull(val){
 		if(val == undefined || val == "" || val == null || val == 'undefined'){
