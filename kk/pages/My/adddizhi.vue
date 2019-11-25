@@ -38,14 +38,14 @@
     width: 150rpx;
     margin-right: 12rpx;
     font-size: 32rpx;
-    color: #474747;
+    color: #696868;
   }
   input {
     flex: 1;
-    height: 32rpx;
+    height: 80rpx;
+    line-height: 80rpx;
     font-size: 32rpx;
     color: #474747;
-    margin-top: 24rpx;
   }
 }
 .tea {
@@ -62,7 +62,7 @@
     width: 150rpx;
     margin-right: 6rpx;
     font-size: 32rpx;
-    color: #474747;
+    color: #696868;
     line-height: 1;
   }
   textarea {
