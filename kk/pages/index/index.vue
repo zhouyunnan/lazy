@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view v-if="school_data">
     <view class="top_">
       <view class="school" @click="linkschool_()">{{school_data.schoolname}}</view>
     </view>
@@ -16,19 +16,27 @@
       <view class="tit">联盟公告</view>
       <view class="msg">{{school_data.gonggao}}</view>
     </view>
-    <view class="xiadan">
-      <text>立即下单</text>
+    <view v-if="dis" @click="linkxd()">
+      <view :class="school_data.yingyezt == 'true'?'xiadan':'xiadan2'">
+        <text v-if="school_data.yingyezt == 'true'">立即下单</text>
+        <text v-if="school_data.yingyezt == 'false'">休息中</text>
+      </view>
+    </view>
+    <view v-else class="xiadan2">
+      <text>休息中</text>
     </view>
   </view>
-</template>
+</template> 
 <script>
 export default {
   data() {
     return {
       school_id: "",
-      school_data:""
+      school_data: "",
+      dis: true,
     };
   },
+  onLoad() {},
   onShow() {
     let school_id = uni.getStorageSync("school_id");
     if (this.myconfig.isnull(school_id)) {
@@ -39,31 +47,78 @@ export default {
   },
   watch: {
     school_id() {
+      this.getpaonan();
+    },
+    school_data() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var day = date.getDate();
+
+      var timestamp3 = Date.parse(new Date());
+
+      if (this.school_data.jiedanshijian != 'undefined') {
+        let bengin = this.school_data.jiedanshijian;
+        var t = "2017-12-08 20:05:00";
+        t = t.replace("2017-12-08", year + "-" + (month + 1) + "-" + day);
+        t = t.replace("20:05", bengin);
+        var T = new Date(t.replace(/-/g,"/"));
+
+        let end = this.school_data.guandianshijian;
+        var tt = "2017-12-08 20:05:00";
+        tt = tt.replace("2017-12-08", year + "-" + (month + 1) + "-" + day);
+        tt = tt.replace("20:05", end);
+        var E = new Date(tt.replace(/-/g,"/"));
+
+        if ((T.getTime() < timestamp3) && (timestamp3 < E.getTime())) {
+          this.dis = true;
+        } else {
+          this.dis = false;
+        }
+      }
+    }
+  },
+  methods: {
+    linkschool_() {
+      uni.redirectTo({
+        url: "/pages/school/xuanzheschool"
+      });
+    },
+    linkxd() {
+      if(this.school_data.yingyezt == 'true'){
+         uni.navigateTo({
+        url: "/pages/xiadan/index"
+      });
+      }
+    },
+    getpaonan() {
+      uni.showLoading({
+        title: "加载中"
+      });
       uni.request({
         method: "POST",
         url: this.myconfig.url + "index.php/home/xrunman/find_byid",
         data: {
-          school_id:this.school_id
+          school_id: this.school_id
         },
         header: {
           "content-type": "application/x-www-form-urlencoded;charset=utf-8",
           Cookie: uni.getStorageSync("sessionid")
         },
         success: res => {
-         let re = res.data;
-         if(re.result){
+          uni.stopPullDownRefresh();
+          uni.hideLoading();
+          let re = res.data;
+          if (re.result) {
             this.school_data = re.content;
-         }else{
+          } else {
             this.linkschool_();
-         }
+          }
+        },
+        fail() {
+          uni.stopPullDownRefresh();
+          uni.hideLoading();
         }
-      });
-    }
-  },
-  methods: {
-    linkschool_() {
-      uni.navigateTo({
-        url: "/pages/school/xuanzheschool"
       });
     },
     call() {
@@ -71,6 +126,9 @@ export default {
         phoneNumber: this.school_data.phone
       });
     }
+  },
+  onPullDownRefresh() {
+    this.getpaonan();
   }
 };
 </script>
@@ -162,9 +220,21 @@ export default {
   line-height: 200rpx;
   color: white;
   font-size: 34rpx;
-  background: radial-gradient(circle at center, #ff507d, #ffffff);
   background: radial-gradient(circle at top, #ff507d, #ff81a0, #e90941);
-  bottom: 150rpx;
+  bottom: 110rpx;
+  left: 275rpx;
+}
+.xiadan2 {
+  position: fixed;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 200rpx;
+  color: white;
+  font-size: 34rpx;
+  background: radial-gradient(circle at top, #dfdfdf, #868686, #707070);
+  bottom: 110rpx;
   left: 275rpx;
 }
 </style>

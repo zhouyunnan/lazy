@@ -151,6 +151,9 @@
 										duration: 2000
 									});
 								}
+							},
+							fail(){
+								uni.hideLoading();
 							}
 						});
 					},

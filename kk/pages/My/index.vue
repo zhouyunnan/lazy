@@ -66,7 +66,7 @@ export default {
 				});
 				uni.request({
 					method: 'POST',
-					url: thiz.myconfig.url + 'api.php/home/login/userinfo',
+					url: thiz.myconfig.url + 'index.php/home/xlogin/userinfo',
 					data: {
 						avatarUrl: userInfo.avatarUrl,
 						nickName: userInfo.nickName

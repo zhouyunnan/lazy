@@ -4,7 +4,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true;
 // 根据 process.env.NODE_ENV 的值判断当前是什么环境 development:开发环境  production生产环境
 
-const host = process.env.NODE_ENV === 'development' ? '/api' : 'http://www.doudianwang.com'
+const host = process.env.NODE_ENV === 'development' ? '/api' : 'https://api.doudianwang.com/lazy/'
 
 //baseURL将会自动加入请求路径的前面
 const instance = axios.create({

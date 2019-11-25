@@ -46,33 +46,9 @@ export default {
       options: [
         {
           value: {
-            val: "shouhuoren",
-            name: "收货人",
-            id: 1
-          },
-          label: "收货人"
-        },
-        {
-          value: {
-            val: "shouhuodizhi",
-            name: "收货地址",
-            id: 2
-          },
-          label: "收货地址"
-        },
-        {
-          value: {
-            val: "lianxidianhua",
-            name: "联系电话",
-            id: 3
-          },
-          label: "联系电话"
-        },
-        {
-          value: {
             val: "quhuohao",
             name: "取货号",
-            id: 4
+            id: 1
           },
           label: "取货号"
         },
@@ -80,7 +56,7 @@ export default {
           value: {
             val: "kuaidigongsi",
             name: "快递公司",
-            id: 5
+            id: 2
           },
           label: "快递公司"
         },
@@ -88,7 +64,7 @@ export default {
           value: {
             val: "shangloufuwu",
             name: "上楼服务",
-            id: 6
+            id: 3
           },
           label: "上楼服务"
         },
@@ -96,7 +72,7 @@ export default {
           value: {
             val: "kuaididaxiao",
             name: "快递大小",
-            id: 7
+            id: 4
           },
           label: "快递大小"
         },
@@ -104,7 +80,7 @@ export default {
           value: {
             val: "tebiebeizhu",
             name: "特别备注",
-            id: 8
+            id: 5
           },
           label: "特别备注"
         },
@@ -112,7 +88,7 @@ export default {
           value: {
             val: "quhuodidian",
             name: "取货地点",
-            id: 9
+            id: 6
           },
           label: "取货地点"
         },
@@ -120,7 +96,7 @@ export default {
           value: {
             val: "huowumingcheng",
             name: "货物名称",
-            id: 10
+            id: 7
           },
           label: "货物名称"
         },
@@ -128,7 +104,7 @@ export default {
           value: {
             val: "qujianshijian",
             name: "取货时间",
-            id: 11
+            id: 8
           },
           label: "取货时间"
         },
@@ -136,7 +112,7 @@ export default {
           value: {
             val: "songdashijian",
             name: "期望送达时间",
-            id: 12
+            id: 9
           },
           label: "期望送达时间"
         }
