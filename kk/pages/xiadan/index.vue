@@ -1,5 +1,5 @@
 <template>
-  <view class="xd_">
+  <view class="xd_" v-if="page_dis">
     <view class="qujianhao" v-if="quhuohao.dis">
       <textarea placeholder="请填取货码，可直接将取件短信粘贴此处" @blur="bindTextAreaBlur" />
     </view>
@@ -20,14 +20,14 @@
           <view class="name">{{fr.name}}</view>
           <view v-if="fr.val == 'shangloufuwu'">
             <picker :value="shangloufuwu" @change="bindTimeChange3" :range="fr.data">
-              <view class="ico" v-if="!shangloufuwu"></view>
-              <view class="msg" v-else>{{shangloufuwu}}</view>
+              <view class="ico" v-if="!fr.value"></view>
+              <view class="msg" v-else>{{fr.value}}</view>
             </picker>
           </view>
           <view v-if="fr.val == 'kuaididaxiao'">
             <picker :value="kuaididaxiao" @change="bindTimeChange4" :range="fr.data">
-              <view class="ico" v-if="!kuaididaxiao"></view>
-              <view class="msg" v-else>{{kuaididaxiao}}</view>
+              <view class="ico" v-if="!fr.value"></view>
+              <view class="msg" v-else>{{fr.value}}</view>
             </picker>
           </view>
         </view>
@@ -37,13 +37,13 @@
           <view class="name">{{fr.name}}</view>
           <picker
             mode="time"
-            :value="songdashijian"
+            :value="fr.value"
             :start="nowtime"
             end="23:59"
             @change="bindTimeChange"
           >
-            <view class="ico" v-if="!songdashijian"></view>
-            <view class="msg" v-else>{{songdashijian}}</view>
+            <view class="ico" v-if="!fr.value"></view>
+            <view class="msg" v-else>{{fr.value}}</view>
           </picker>
         </view>
       </view>
@@ -57,13 +57,13 @@
             end="23:59"
             @change="bindTimeChange2"
           >
-            <view class="ico" v-if="!qujianshijian"></view>
-            <view class="msg" v-else>{{qujianshijian}}</view>
+            <view class="ico" v-if="!fr.value"></view>
+            <view class="msg" v-else>{{fr.value}}</view>
           </picker>
         </view>
       </view>
     </view>
-    <view class="xiadan">提交订单</view>
+    <view class="xiadan" @click="xiadnbtn()">提交订单</view>
   </view>
 </template>
 <script>
@@ -81,10 +81,6 @@ export default {
         dis: false,
         val: ""
       },
-      songdashijian: "",
-      qujianshijian: "",
-      shangloufuwu: "",
-      kuaididaxiao: "",
       from: [],
       sldata: [
         "需要送上楼",
@@ -93,7 +89,8 @@ export default {
         "放楼下宿管处",
         "其他"
       ],
-      dxdata: ["1kg以下", "1kg - 5kg", "5kg - 10kg", "10ky以上"]
+      dxdata: ["1kg以下", "1kg - 5kg", "5kg - 10kg", "10ky以上"],
+      page_dis:false
     };
   },
   onLoad() {
@@ -133,6 +130,7 @@ export default {
           let re = res.data;
           if (re.result) {
             this.bds = re.lists;
+            this.page_dis = true;
           } else {
             uni.showToast({
               title: re.msg,
@@ -140,6 +138,7 @@ export default {
               duration: 1400,
               position: "top"
             });
+            this.page_dis = false;
           }
         },
         fail() {}
@@ -204,6 +203,75 @@ export default {
     }
   },
   methods: {
+    xiadnbtn() {
+      let from_dd = Object.create({});
+      let quhuohao = this.quhuohao.val;
+      if (this.quhuohao.dis) {
+        if (this.myconfig.isnull(quhuohao)) {
+          uni.showToast({
+            title: "请输入取货号",
+            duration: 1000,
+            icon: "none"
+          });
+          return;
+        }
+        from_dd["quhuohao"] = quhuohao;
+      }
+      if (this.myconfig.isnull(this.dizhi)) {
+        uni.showToast({
+          title: "请选择收件地址",
+          duration: 1000,
+          icon: "none"
+        });
+        return;
+      }
+
+      from_dd["shouhuoren"] = this.dizhi.name;
+      from_dd["shouhuodizhi"] = this.dizhi.dizhi;
+      from_dd["lianxidianhua"] = this.dizhi.phone;
+
+      let data = this.from;
+      for (let i = 0; i < data.length; i++) {
+        if (this.myconfig.isnull(data[i]["value"])) {
+          if (data[i]["val"] != "tebiebeizhu") {
+            uni.showToast({
+              title: data[i].name + "不能为空",
+              duration: 1000,
+              icon: "none"
+            });
+            return;
+          }
+        }
+        from_dd[data[i]["val"]] = data[i]["value"];
+      }
+      from_dd["schoolid"] = this.school_id;
+      console.log(from_dd);
+      let thiz = this;
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xxiadan/yuxiadan",
+        data: from_dd,
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+
+        },
+        fail() {
+          uni.hideLoading();
+          uni.showToast({
+            title: "失败",
+            duration: 1500,
+            icon: "none"
+          });
+        }
+      });
+      
+    
+    },
+
+
     xzdz() {
       uni.navigateTo({
         url: "/pages/My/dizhi"
@@ -213,15 +281,15 @@ export default {
       uni.request({
         method: "POST",
         url: this.myconfig.url + "index.php/home/xdizhi/dizhimr",
-        data: {  },
+        data: {},
         header: {
           "content-type": "application/x-www-form-urlencoded;charset=utf-8",
           Cookie: uni.getStorageSync("sessionid")
         },
         success: res => {
-           if(res.data.result){
-              this.dizhi = res.data.content;
-           }
+          if (res.data.result) {
+            this.dizhi = res.data.content;
+          }
         },
         fail() {}
       });
@@ -235,16 +303,36 @@ export default {
       });
     },
     bindTimeChange: function(e) {
-      this.songdashijian = e.target.value;
+      let index = this.from.findIndex(function(tab) {
+        if (tab.val == "songdashijian") {
+          return true;
+        }
+      });
+      this.from[index].value = e.target.value;
     },
     bindTimeChange2: function(e) {
-      this.qujianshijian = e.target.value;
+      let index = this.from.findIndex(function(tab) {
+        if (tab.val == "qujianshijian") {
+          return true;
+        }
+      });
+      this.from[index].value = e.target.value;
     },
     bindTimeChange3: function(e) {
-      this.shangloufuwu = this.sldata[e.target.value];
+      let index = this.from.findIndex(function(tab) {
+        if (tab.val == "shangloufuwu") {
+          return true;
+        }
+      });
+      this.from[index].value = this.sldata[e.target.value];
     },
     bindTimeChange4: function(e) {
-      this.kuaididaxiao = this.dxdata[e.target.value];
+      let index = this.from.findIndex(function(tab) {
+        if (tab.val == "kuaididaxiao") {
+          return true;
+        }
+      });
+      this.from[index].value = this.dxdata[e.target.value];
     },
     linkdizhi() {
       uni.redirectTo({
