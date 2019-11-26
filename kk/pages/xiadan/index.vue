@@ -3,12 +3,11 @@
     <view class="qujianhao" v-if="quhuohao.dis">
       <textarea placeholder="请填取货码，可直接将取件短信粘贴此处" @blur="bindTextAreaBlur" />
     </view>
-    <view class="xzq">
+    <view class="xzq" @click="xzdz()">
       <view class="name">收货地址</view>
-      <!-- <view class="ico"></view> -->
-      <view class="msg">周云男17600664495</view>
+      <view class="ico" v-if="dizhi==''"></view>
+      <view class="msg" v-else>{{dizhi.name}} - {{dizhi.phone}}</view>
     </view>
-
     <view v-for="(fr,key) in from" :key="key">
       <view v-if="fr.type == 'inp'">
         <view class="inp">
@@ -71,6 +70,7 @@
 export default {
   data() {
     return {
+      dizhi: "",
       school_id: "",
       dis: true,
       bds: "",
@@ -108,6 +108,13 @@ export default {
       this.linkschool_();
     } else {
       this.school_id = school_id;
+    }
+
+    let dizhi = uni.getStorageSync("dizhi");
+    if (this.myconfig.isnull(dizhi)) {
+      this.mrdz();
+    } else {
+      this.dizhi = dizhi;
     }
   },
   watch: {
@@ -197,6 +204,28 @@ export default {
     }
   },
   methods: {
+    xzdz() {
+      uni.navigateTo({
+        url: "/pages/My/dizhi"
+      });
+    },
+    mrdz() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdizhi/dizhimr",
+        data: {  },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+           if(res.data.result){
+              this.dizhi = res.data.content;
+           }
+        },
+        fail() {}
+      });
+    },
     bindTextAreaBlur(e) {
       this.quhuohao.val = e.detail.value;
     },
@@ -216,6 +245,11 @@ export default {
     },
     bindTimeChange4: function(e) {
       this.kuaididaxiao = this.dxdata[e.target.value];
+    },
+    linkdizhi() {
+      uni.redirectTo({
+        url: "/pages/school/xuanzheschool"
+      });
     }
   }
 };
@@ -249,7 +283,7 @@ export default {
   font-size: 32rpx;
   view {
     margin-left: 20rpx;
-    color: #2c2c2c;
+    color: #696868;
     margin-right: 20rpx;
   }
   input {
@@ -272,7 +306,7 @@ export default {
   .name {
     flex: 1;
     margin-left: 20rpx;
-    color: #2c2c2c;
+    color: #696868;
     margin-right: 30rpx;
   }
   .ico {
@@ -301,8 +335,8 @@ export default {
   line-height: 90rpx;
   font-size: 34rpx;
   bottom: 0rpx;
-  background:white;
-	color: #FF507D;
-  border-top: 2rpx dashed #FF507D;
+  background: white;
+  color: #ff507d;
+  border-top: 2rpx dashed #ff507d;
 }
 </style>

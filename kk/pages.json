@@ -45,14 +45,14 @@
 		{
 			"path": "pages/My/dizhi",
 			"style": {
-				"navigationBarTitleText": "管理收货地址",
+				"navigationBarTitleText": "收货地址",
 				"disableScroll": true
 			}
 		},
 		{
 			"path": "pages/My/adddizhi",
 			"style": {
-				"navigationBarTitleText": "添加收货地址",
+				"navigationBarTitleText": "添加地址",
 				"disableScroll": true
 			}
 		},

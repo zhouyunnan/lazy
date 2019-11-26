@@ -1,33 +1,23 @@
 <template>
   <view>
-    <view class="dizhi_">
-      <view class="top">
-        <text>周云男</text>
-        <text>17600664494</text>
+    <view class="dizhi_" v-for="(dz,key) in dizhis" :key="key">
+      <view class="content">
+        <view class="top">
+          <text>{{dz.name}}</text>
+          <text>{{dz.phone}}</text>
+        </view>
+        <view class="dizhi">{{dz.dizhi}}</view>
+        <view class="diset">
+          <view :class="dz.moren == 'true'?'active':'moren'" @click="morensz(dz.id)"></view>
+          <view class="swmr" @click="morensz(dz.id)">设为默认</view>
+          <!-- <view class="bjico"></view> -->
+          <!-- <view class="bj">编辑</view> -->
+          <view class="scico"></view>
+          <view class="sc" @click="dele(dz.id)">删除</view>
+        </view>
       </view>
-      <view class="dizhi">你可以用它收集灵感,保存有用的素材,计划旅行,晒晒自己想要的东西</view>
-      <view class="diset">
-        <view class="moren"></view>
-        <view class="swmr">设为默认</view>
-        <view class="bjico"></view>
-        <view class="bj">编辑</view>
-        <view class="scico"></view>
-        <view class="sc">删除</view>
-      </view>
-    </view>
-    <view class="dizhi_">
-      <view class="top">
-        <text>周云男</text>
-        <text>17600664494</text>
-      </view>
-      <view class="dizhi">你可以用它收集灵感,保存有用的素材,计划旅行,晒晒自己想要的东西</view>
-      <view class="diset">
-        <view class="active"></view>
-        <view class="swmr">设为默认</view>
-        <view class="bjico"></view>
-        <view class="bj">编辑</view>
-        <view class="scico"></view>
-        <view class="sc">删除</view>
+      <view class="ico" v-if="dis" @click="xd(dz)">
+        <view>选定</view>
       </view>
     </view>
     <view class="public_btn" @click="adddizhi()">添加新地址</view>
@@ -36,11 +26,108 @@
 
 <script>
 export default {
-  methods:{
-    adddizhi(){
-			uni.navigateTo({
-				url: '/pages/My/adddizhi'
-			});
+  data() {
+    return {
+      dizhis: "",
+      dis: false
+    };
+  },
+  onLoad() {
+    var pages = getCurrentPages();
+    var page = pages[pages.length - 2];
+    if (page.route == "pages/xiadan/index") {
+      this.dis = true;
+    }
+  },
+  onShow() {
+    this.select();
+  },
+  methods: {
+    adddizhi() {
+      uni.navigateTo({
+        url: "/pages/My/adddizhi"
+      });
+    },
+    select() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdizhi/getall",
+        data: {},
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          this.dizhis = res.data.lists;
+        },
+        fail() {}
+      });
+    },
+    dele(id) {
+      uni.showModal({
+        title: "提示",
+        content: "确认删除吗？",
+        success: res => {
+          if (res.confirm) {
+            uni.request({
+              method: "POST",
+              url: this.myconfig.url + "index.php/home/xdizhi/dele",
+              data: { id },
+              header: {
+                "content-type":
+                  "application/x-www-form-urlencoded;charset=utf-8",
+                Cookie: uni.getStorageSync("sessionid")
+              },
+              success: res => {
+                if (!res.data.result) {
+                  uni.showToast({
+                    title: res.data.msg,
+                    duration: 1500,
+                    icon: "none"
+                  });
+                } else {
+                  this.select();
+                }
+              },
+              fail() {}
+            });
+          } else if (res.cancel) {
+            return;
+          }
+        }
+      });
+    },
+    morensz(id) {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdizhi/moren",
+        data: { id },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          if (!res.data.result) {
+            uni.showToast({
+              title: res.data.msg,
+              duration: 1500,
+              icon: "none"
+            });
+          } else {
+            uni.showToast({
+              title: res.data.msg,
+              duration: 1500,
+              icon: "none"
+            });
+            this.select();
+          }
+        },
+        fail() {}
+      });
+    },
+    xd(val) {
+      uni.setStorageSync("dizhi", val);
+      uni.navigateBack();
     }
   }
 };
@@ -51,8 +138,28 @@ export default {
   width: 750rpx;
   background: white;
   margin-top: 10rpx;
+  display: flex;
+  .content {
+    flex: 1;
+    margin: 0 10rpx 0 20rpx;
+  }
+  .ico {
+    margin: 0 20rpx 0 10rpx;
+    color: #ff507d;
+    position: relative;
+    width: 80rpx;
+    font-size: 28rpx;
+    view {
+      width: 80rpx;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); 
+      border-left: 1px solid #ff507d;
+    }
+  }
   .top {
-    width: 710rpx;
+    width: 100%;
     line-height: 70rpx;
     margin: 0 auto;
     font-size: 32rpx;
@@ -62,7 +169,7 @@ export default {
     }
   }
   .dizhi {
-    width: 710rpx;
+    width: 100%;
     line-height: 1.5;
     margin: 0 auto;
     font-size: 28rpx;
@@ -98,7 +205,7 @@ export default {
   color: #696868;
   .moren {
     width: 28rpx;
-    height:28rpx;
+    height: 28rpx;
     border-radius: 50%;
     border: 2rpx solid #696868;
     margin-top: 19rpx;
