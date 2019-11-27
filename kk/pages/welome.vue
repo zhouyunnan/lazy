@@ -13,7 +13,7 @@ export default {
     return {};
   },
   onLoad() {
-    // //清理缓存
+    //清理缓存
     try {
       uni.clearStorageSync();
       uni.clearStorage();
@@ -28,7 +28,7 @@ export default {
     // });
     // 选择学校
     // uni.redirectTo({
-    //     url: '/pages/xiadan/index'
+    //     url: '/pages/xiadan/ddhd'
     // });
   },
   methods: {

@@ -4,7 +4,7 @@
       <textarea placeholder="请填取货码，可直接将取件短信粘贴此处" @blur="bindTextAreaBlur" />
     </view>
     <view class="xzq" @click="xzdz()">
-      <view class="name">收货地址</view>
+      <view class="name">送达地址</view>
       <view class="ico" v-if="dizhi==''"></view>
       <view class="msg" v-else>{{dizhi.name}} - {{dizhi.phone}}</view>
     </view>
@@ -90,7 +90,7 @@ export default {
         "其他"
       ],
       dxdata: ["1kg以下", "1kg - 5kg", "5kg - 10kg", "10ky以上"],
-      page_dis:false
+      page_dis: false
     };
   },
   onLoad() {
@@ -245,7 +245,12 @@ export default {
         from_dd[data[i]["val"]] = data[i]["value"];
       }
       from_dd["schoolid"] = this.school_id;
-      console.log(from_dd);
+
+      uni.showLoading({
+        title: "请稍后",
+        mask: true
+      });
+
       let thiz = this;
       uni.request({
         method: "POST",
@@ -256,7 +261,19 @@ export default {
           Cookie: uni.getStorageSync("sessionid")
         },
         success: res => {
-
+          uni.hideLoading();
+          let re = res.data;
+          if (re.result) {
+            uni.redirectTo({
+              url: "/pages/xiadan/ddhd?id=" + re.id
+            });
+          } else {
+            uni.showToast({
+              title: "失败",
+              duration: 1500,
+              icon: "none"
+            });
+          }
         },
         fail() {
           uni.hideLoading();
@@ -267,10 +284,7 @@ export default {
           });
         }
       });
-      
-    
     },
-
 
     xzdz() {
       uni.navigateTo({
