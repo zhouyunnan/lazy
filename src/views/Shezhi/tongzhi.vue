@@ -1,17 +1,26 @@
 <template>
   <div>
+    <el-dialog title="短信提醒限制" class="dx" :visible.sync="centerDialogVisible" width="500px" center>
+      <div class="txbox">
+        <p>1条/分钟: 一分钟内最多接收1条</p>
+        <p>5条/小时：一个小时不会超过5条</p>
+        <p>50条/日：一天不会超过50条</p>
+      </div>
+    </el-dialog>
+
     <div class="page_name">订单接收设置</div>
     <div class="page_msg">注：你可以任选接收方式，至少得选一个</div>
     <div class="tait">
       <div>
         短信提醒
-        <span>(一天最多接收50条，且仅可设置一个手机号)</span>
+        <span @click="centerDialogVisible = true">(慎用，点击查看限制)</span>
       </div>
 
-      <el-button :type="jieshou == 'true'?'success':'info'" class="addbtn" size="mini">
-        <span v-if="jieshou == 'true'">启用中...</span>
-        <span v-else>停用</span>
-      </el-button>
+      <span
+        v-if="jieshou == 'true'"
+        style="color:#67C23A;margin-left:20px; text-decoration: underline"
+      >启用中...</span>
+      <span v-else style="color:#909399;margin-left:20px;text-decoration: underline">已停用</span>
 
       <el-button
         type="primary"
@@ -44,10 +53,11 @@
         <span>(接收条数无限制，可设置2个，建议使用163邮箱，并且把加入白名单，防止遗漏提醒)</span>
       </div>
 
-      <el-button :type="emaintz == 'true'?'success':'info'" class="addbtn" size="mini">
-        <span v-if="emaintz == 'true'">启用中...</span>
-        <span v-else>停用</span>
-      </el-button>
+      <span
+        v-if="emaintz == 'true'"
+        style="color:#67C23A;margin-left:20px; text-decoration: underline"
+      >启用中...</span>
+      <span v-else style="color:#909399;margin-left:20px;text-decoration: underline">已停用</span>
 
       <el-button
         type="primary"
@@ -89,7 +99,8 @@ export default {
       jieshou: "",
       phoneTZmsg: "",
       emaintz: "",
-      emaintzTZmsg: ""
+      emaintzTZmsg: "",
+      centerDialogVisible: false
     };
   },
   created() {
@@ -347,6 +358,7 @@ export default {
   span {
     color: #606266;
     font-size: 12px;
+    cursor: pointer;
   }
   button {
     float: right;
@@ -371,5 +383,14 @@ export default {
   float: right;
   margin-right: 20px;
   cursor: pointer;
+}
+.dx {
+  .txbox {
+    padding: 20px;
+    padding-bottom: 50px;
+    p {
+      line-height: 3;
+    }
+  }
 }
 </style>
