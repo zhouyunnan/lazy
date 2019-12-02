@@ -67,7 +67,7 @@
       >{{emaintzTZmsg}}</el-button>
 
       <span v-show="tableData2.length < 2">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="addemail()"></el-button>
+        <el-button type="primary" icon="el-icon-plus" size="mini" @click="addemail()" style="margin-right:10px"></el-button>
       </span>
     </div>
     <div class="phone">

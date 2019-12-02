@@ -24,6 +24,13 @@
               <view class="msg" v-else>{{fr.value}}</view>
             </picker>
           </view>
+          
+          <view v-if="fr.val == 'kuaidigongsi'">
+            <picker :value="kuaidigongsi" @change="bindTimeChange5" :range="fr.data">
+              <view class="ico" v-if="!fr.value"></view>
+              <view class="msg" v-else>{{fr.value}}</view>
+            </picker>
+          </view>
           <view v-if="fr.val == 'kuaididaxiao'">
             <picker :value="kuaididaxiao" @change="bindTimeChange4" :range="fr.data">
               <view class="ico" v-if="!fr.value"></view>
@@ -90,7 +97,21 @@ export default {
         "其他"
       ],
       dxdata: ["1kg以下", "1kg - 5kg", "5kg - 10kg", "10ky以上"],
-      page_dis: false
+      page_dis: false,
+      kdgs:[
+        "京东快递",
+        "顺丰快递",
+        "圆通快递",
+        "中通快递",
+        "申通快递",
+        "韵达快递",
+        "百世快递",
+        "天天快递",
+        "德邦快递",
+        "邮政EMS",
+        "唯品会",
+        "其他请备注",
+      ]
     };
   },
   onLoad() {
@@ -161,7 +182,6 @@ export default {
       for (let i = 0; i < bds.length; i++) {
         let tab = bds[i];
         if (
-          tab.val == "kuaidigongsi" ||
           tab.val == "tebiebeizhu" ||
           tab.val == "quhuodidian" ||
           tab.val == "huowumingcheng"
@@ -171,6 +191,15 @@ export default {
             val: tab.val,
             value: "",
             type: "inp"
+          });
+        }
+        if (tab.val == "kuaidigongsi") {
+          this.from.push({
+            name: tab.name,
+            val: tab.val,
+            value: "",
+            type: "sele_",
+            data: this.kdgs
           });
         }
         if (tab.val == "shangloufuwu") {
@@ -347,6 +376,15 @@ export default {
         }
       });
       this.from[index].value = this.dxdata[e.target.value];
+    },
+    
+    bindTimeChange5: function(e) {
+      let index = this.from.findIndex(function(tab) {
+        if (tab.val == "kuaidigongsi") {
+          return true;
+        }
+      });
+      this.from[index].value = this.kdgs[e.target.value];
     },
     linkdizhi() {
       uni.redirectTo({

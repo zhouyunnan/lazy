@@ -1,8 +1,8 @@
 <template>
-  <view v-if="dddata">
+  <view v-if="dddata" style="margin-bottom:150rpx">
     <view class="top" v-if="dddata.quhuohao != undefined">
       <view class="text_box">
-        <view class="tit">{{dddata.quhuohao}}</view>
+        <view class="qhh">{{dddata.quhuohao}}</view>
       </view>
     </view>
     <view class="top">
@@ -34,7 +34,7 @@
           <text>重新下单</text>
         </view>
       </view>
-      <view class="btn">确认下单</view>
+      <view class="btn" @click="qurendd()">确认下单</view>
     </view>
   </view>
 </template>
@@ -178,6 +178,48 @@ export default {
     },
     linkgo() {
       uni.navigateBack();
+    },
+    qurendd() {
+      uni.showLoading({
+        title: "马上就好",
+        mask: true
+      });
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/Xxiadan/querendd",
+        data: {
+          id: this.ddid
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          uni.hideLoading();
+          let re = res.data;
+          if (re.result) {
+            uni.reLaunch({
+              url: "/pages/xiadan/ok"
+            });
+          } else {
+            uni.hideLoading();
+            uni.showToast({
+              title: "提交失败!",
+              duration: 2000,
+              icon: "none"
+            });
+          }
+          return;
+        },
+        fail() {
+          uni.hideLoading();
+          uni.showToast({
+            title: "出现错误!",
+            duration: 2000,
+            icon: "none"
+          });
+        }
+      });
     }
   }
 };
@@ -191,14 +233,22 @@ export default {
   margin-bottom: 20rpx;
   line-height: 1.5;
   font-size: 32rpx;
+
   .text_box {
     width: 100vw;
     display: flex;
     margin-top: 10rpx;
+
     .tit {
       width: 160rpx;
       margin-left: 20rpx;
       color: #696868;
+       text-align: justify;
+    }
+    .qhh{
+      flex: 1;
+      margin:0rpx 20rpx;
+      color: #474747;
     }
     .msg {
       flex: 1;
@@ -207,11 +257,13 @@ export default {
     }
   }
 }
+
 .content {
   width: 100vw;
   margin: 20rpx 0rpx;
   background: white;
   margin-bottom: 150rpx;
+
   .inp {
     width: 100vw;
     height: 100rpx;
@@ -220,11 +272,13 @@ export default {
     display: flex;
     line-height: 100rpx;
     font-size: 32rpx;
+
     .tit {
       margin-left: 20rpx;
       color: #696868;
       margin-right: 20rpx;
     }
+
     .msg {
       flex: 1;
       text-align: right;
@@ -235,6 +289,7 @@ export default {
     }
   }
 }
+
 .qrbtn {
   width: 100vw;
   position: fixed;
@@ -244,8 +299,10 @@ export default {
   z-index: 9;
   background: white;
   display: flex;
+
   .xx {
     flex: 1;
+
     view {
       padding: 30rpx;
       font-size: 30rpx;
@@ -253,11 +310,13 @@ export default {
       color: #696868;
       float: right;
       margin-right: 20rpx;
+
       text {
         text-decoration: underline;
       }
     }
   }
+
   .btn {
     width: 200rpx;
     color: white;

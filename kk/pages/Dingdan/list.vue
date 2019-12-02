@@ -13,265 +13,224 @@
     </view>
     <view class="dd_">
       <view v-show="nodis == 0">
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:1">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view class="content">顺丰-20-30-10</view>
-          </view>
+        <view v-if="wps == undefined">
+          <None></None>
         </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:1">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
+        <view>
+          <view class="box_" v-for="(wp,key) in wps" :key="key">
+            <view class="w">
+              <view class="tt">
+                <view class="fle" style="opacity:1">
+                  <view class="time">{{time(wp.createtime,1)}}</view>
+                  <view class="zt1">已接单</view>
+                </view>
               </view>
+              <view class="dizhi">{{wp.shouhuodizhi}}</view>
+              <view class="content" v-if="wp.quhuohao">{{wp.quhuohao}}</view>
             </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:1">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
           </view>
         </view>
       </view>
       <view v-show="nodis == 1">
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
+        <view v-if="psz == undefined">
+          <None></None>
         </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
+        <view>
+          <view class="box_" v-for="(ps,key) in psz" :key="key">
+            <view class="w">
+              <view class="tt">
+                <view class="fle" style="opacity:0.5">
+                  <view class="time">{{time(ps.createtime,1)}}</view>
+                  <view class="zt1">已接单</view>
+                </view>
+                <view class="fle" style="opacity:1">
+                  <view class="time">{{time(ps.paisongtime,2)}}</view>
+                  <view class="zt2">派送中</view>
+                </view>
               </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
+              <view class="dizhi">{{ps.shouhuodizhi}}</view>
+              <view class="content" v-if="ps.quhuohao">{{ps.quhuohao}}</view>
             </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
           </view>
         </view>
       </view>
       <view v-show="nodis == 2">
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.3">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
+        <view v-if="wcdds == undefined">
+          <None></None>
+        </view>
+        <view v-else>
+          <view class="box_" v-for="(ddwz,key) in wcdds" :key="key">
+            <view class="w">
+              <view class="tt">
+                <view class="fle" style="opacity:0.3">
+                  <view class="time">{{time(ddwz.createtime,1)}}</view>
+                  <view class="zt1">已接单</view>
+                </view>
+                <view class="fle" style="opacity:0.5">
+                  <view class="time">{{time(ddwz.paisongtime,2)}}</view>
+                  <view class="zt2">派送中</view>
+                </view>
+                <view class="fle" style="opacity:1">
+                  <view class="time">{{time(ddwz.wanchengtime,2)}}</view>
+                  <view class="zt3">已完成</view>
+                </view>
               </view>
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">11:01</view>
-                <view class="zt3">已完成</view>
-              </view>
+              <view class="dizhi">{{ddwz.shouhuodizhi}}</view>
+              <view class="content" v-if="ddwz.quhuohao">{{ddwz.quhuohao}}</view>
             </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
           </view>
         </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.3">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">11:01</view>
-                <view class="zt3">已完成</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.3">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">11:01</view>
-                <view class="zt3">已完成</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.3">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">11:01</view>
-                <view class="zt3">已完成</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="box_">
-          <view class="w">
-            <view class="tt">
-              <view class="fle" style="opacity:0.3">
-                <view class="time">10.01 - 10:01</view>
-                <view class="zt1">已接单</view>
-              </view>
-              <view class="fle" style="opacity:0.5">
-                <view class="time">10:31</view>
-                <view class="zt2">派送中</view>
-              </view>
-              <view class="fle" style="opacity:1">
-                <view class="time">11:01</view>
-                <view class="zt3">已完成</view>
-              </view>
-            </view>
-            <view class="dizhi">成都市武侯区武侯大道金楠国际2-3804</view>
-            <view
-              class="content"
-            >中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！中国的多端开发时代演进，促使跨端开发领域必然产生新的平台巨头，加入DCloud，一起创造未来！</view>
-          </view>
-        </view>
-        <view class="loading">{{loading}}</view>
+        <view class="loading" v-if="wcdds.length>pagesize">{{loading}}</view>
       </view>
     </view>
   </view>
 </template>
 <script>
+import None from "../public/none.vue";
+
 export default {
+  components: {
+    None
+  },
   data() {
     return {
       nodis: 0,
-      loading: "上拉加载更多..."
+      loading: "上拉加载更多...",
+      p: 1,
+      wcdds: "",
+      wps: "",
+      pagesize: 3,
+      haiyouma: true,
+      psz: ""
     };
   },
-  methods: {
-    changedis(val) {
-      this.nodis = val;
-    }
+  onLoad() {
+    this.getwps();
   },
   watch: {
-    nodis() {}
+    nodis() {
+      uni.pageScrollTo({
+        scrollTop: 0,
+        duration: 300
+      });
+      let n = this.nodis;
+
+      if (n == "0" && this.wps == "") {
+        this.getwps();
+      }
+
+      if (n == "1" && this.psz == "") {
+        this.getpsz();
+      }
+
+      if (n == "2" && this.p == 1) {
+        this.getwc();
+      }
+    }
+  },
+  methods: {
+    time(val, n) {
+      var time = new Date(parseInt(val) * 1000);
+      var y = time.getFullYear(); //getFullYear方法以四位数字返回年份
+      var M = time.getMonth() + 1; // getMonth方法从 Date 对象返回月份 (0 ~ 11)，返回结果需要手动加一
+      var d = time.getDate(); // getDate方法从 Date 对象返回一个月中的某一天 (1 ~ 31)
+      var h = time.getHours(); // getHours方法返回 Date 对象的小时 (0 ~ 23)
+      var m = time.getMinutes(); // getMinutes方法返回 Date 对象的分钟 (0 ~ 59)
+      var s = time.getSeconds(); // getSeconds方法返回 Date 对象的秒数 (0 ~ 59)
+      if (n == "1") {
+        return y + "-" + M + "-" + d + " " + h + ":" + m;
+      } else {
+        return M + "-" + d + " " + h + ":" + m;
+      }
+    },
+    changedis(val) {
+      this.nodis = val;
+    },
+    getwc() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdingdan/wancdd",
+        data: {
+          p: this.p,
+          pagesize: this.pagesize
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          let re = res.data;
+          uni.stopPullDownRefresh();
+          if (re.result) {
+            this.p++;
+            if (this.wcdds == "") {
+              this.wcdds = re.lists;
+            } else {
+              let narr = this.wcdds;
+              this.wcdds = narr.concat(re.lists);
+            }
+          } else {
+            this.loading = "没有了";
+            this.haiyouma = false;
+          }
+          if (this.wcdds == "") {
+            this.wcdds = null;
+          }
+        }
+      });
+    },
+    getwps() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdingdan/getdd",
+        data: {},
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          uni.stopPullDownRefresh();
+          this.wps = res.data.lists;
+        }
+      });
+    },
+    getpsz() {
+      uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xdingdan/peisongz",
+        data: {},
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: res => {
+          uni.stopPullDownRefresh();
+          this.psz = res.data.lists;
+        }
+      });
+    }
   },
   onPullDownRefresh() {
-    console.log("refresh");
-    setTimeout(function() {
-      uni.stopPullDownRefresh();
-    }, 1000);
+    if (this.nodis == "0") {
+      this.wps = "";
+      this.getwps();
+    }
+    if (this.nodis == "1") {
+      this.psz = "";
+      this.getpsz();
+    }
+    if (this.nodis == "2") {
+      this.p = 1;
+      this.wcdds = "";
+      this.haiyouma = true;
+      this.getwc();
+    }
   },
   onReachBottom() {
-    let thiz = this;
-    thiz.loading = "加载中...";
-    setTimeout(function() {
-      thiz.loading = "没有了";
-    }, 3000);
+    if (this.haiyouma && this.nodis == "2") {
+      this.loading = "加载中...";
+      this.getwc();
+    }
   }
 };
 </script>
@@ -317,6 +276,7 @@ export default {
 }
 .dd_ {
   margin-top: 110rpx;
+  margin-bottom: 200rpx;
   .box_ {
     @include w_;
     margin-top: 20rpx;

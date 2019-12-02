@@ -67,7 +67,21 @@
 			"style": {
 				"navigationBarTitleText": "订单确认"
 			}
-		}
+		},
+		{
+			"path": "pages/xiadan/ok",
+			"style": {
+				"navigationBarTitleText": "下单成功"
+			}
+		},
+	    {
+            "path" : "pages/Web/Web",
+            "style" : {
+					"navigationBarTitleText": "为了联盟",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"navigationBarTextStyle": "black"
+			}
+        }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -28,7 +28,7 @@ export default {
     // });
     // 选择学校
     // uni.redirectTo({
-    //     url: '/pages/xiadan/ddhd'
+    //     url: '/pages/xiadan/ok'
     // });
   },
   methods: {
