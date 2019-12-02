@@ -28,17 +28,21 @@
         <view class="msg">{{dd.val}}</view>
       </view>
     </view>
-    <view class="qrbtn">
+    <view class="qrbtn" v-if="dddata.wanchengtime == '0' || dddata.wanchengtime == undefined">
       <view class="xx">
-        <view @click="linkgo()">
-          <text>重新下单</text>
+        <view @click="quxiao()" v-if="dddata.tz == 'true'">
+          <text>取消订单</text>
+        </view>
+        <view v-if="dddata.tz == 'quxiao'">
+          <text>已取消</text>
         </view>
       </view>
-      <view class="btn" @click="qurendd()">确认下单</view>
     </view>
+    <message ref="Message"></message>
   </view>
 </template>
 <script>
+import boboMessage from "@/components/bobo-message/bobo-message.vue";
 export default {
   data() {
     return {
@@ -46,6 +50,9 @@ export default {
       dddata: "",
       ndata: ""
     };
+  },
+  components: {
+    message: boboMessage
   },
   onLoad: function(option) {
     this.ddid = option.id;
@@ -56,9 +63,6 @@ export default {
     } else {
       this.getdd();
     }
-  },
-  onUnload() {
-    this.dele();
   },
   methods: {
     getdd() {
@@ -81,7 +85,11 @@ export default {
             for (let c in content) {
               if (!this.myconfig.isnull(content[c])) {
                 if (
+                  c == "createtime" ||
+                  c == "paisongtime" ||
+                  c == "wanchengtime" ||
                   c == "lianxidianhua" ||
+                  c == "tz" ||
                   c == "quhuohao" ||
                   c == "id" ||
                   c == "shouhuodizhi" ||
@@ -133,12 +141,10 @@ export default {
                     default:
                       name = "其他";
                   }
-                  if (name !== "其他") {
-                    arr.push({
-                      name,
-                      val: content[c]
-                    });
-                  }
+                  arr.push({
+                    name,
+                    val: content[c]
+                  });
                 }
               }
             }
@@ -161,79 +167,45 @@ export default {
         }
       });
     },
-    dele() {
-      uni.request({
-        method: "POST",
-        url: this.myconfig.url + "index.php/home/Xxiadan/deledd",
-        data: {
-          id: this.ddid
-        },
-        header: {
-          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
-          Cookie: uni.getStorageSync("sessionid")
-        },
-        success: res => {
-          return;
-        },
-        fail() {}
-      });
-    },
-    linkgo() {
-      uni.navigateBack();
-    },
-    qurendd() {
-      let thiz = this;
-      uni.showModal({
-        title: "",
-        content: "都确认好了吗？",
-        success: function(res) {
-          if (res.confirm) {
-            uni.showLoading({
-              title: "马上就好",
-              mask: true
-            });
-            uni.request({
-              method: "POST",
-              url: thiz.myconfig.url + "index.php/home/Xxiadan/querendd",
-              data: {
-                id: thiz.ddid
-              },
-              header: {
-                "content-type":
-                  "application/x-www-form-urlencoded;charset=utf-8",
-                Cookie: uni.getStorageSync("sessionid")
-              },
-              success: res => {
-                uni.hideLoading();
-                let re = res.data;
-                if (re.result) {
-                  uni.reLaunch({
-                    url: "/pages/xiadan/ok"
-                  });
-                } else {
-                  uni.hideLoading();
-                  uni.showToast({
-                    title: "提交失败!",
-                    duration: 2000,
-                    icon: "none"
-                  });
-                }
-                return;
-              },
-              fail() {
-                uni.hideLoading();
-                uni.showToast({
-                  title: "出现错误!",
-                  duration: 2000,
-                  icon: "none"
-                });
-              }
-            });
-          } else if (res.cancel) {
-            return;
+    quxiao() {
+      let dd = this.dddata;
+      if (dd.paisongtime !== "0") {
+        this.$refs["Message"].warn("在派送中的订单不能取消");
+      } else {
+        let thiz = this;
+        uni.showModal({
+          title: "提示",
+          content: "确认取消订单?",
+          success: function(res) {
+            if (res.confirm) {
+              uni.request({
+                method: "POST",
+                url: thiz.myconfig.url + "index.php/home/Xxiadan/quxiaodd",
+                data: {
+                  id: thiz.ddid
+                },
+                header: {
+                  "content-type":
+                    "application/x-www-form-urlencoded;charset=utf-8",
+                  Cookie: uni.getStorageSync("sessionid")
+                },
+                success: res => {
+                  let re = res.data;
+                  if (re.result) {
+                    thiz.$refs["Message"].warn("取消成功！");
+                    thiz.getdd();
+                  } else {
+                    thiz.$refs["Message"].warn("取消失败");
+                  }
+                },
+                fail() {}
+              });
+            } else if (res.cancel) {
+              return;
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 };

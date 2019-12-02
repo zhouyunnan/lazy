@@ -18,7 +18,7 @@
         </view>
         <view>
           <view class="box_" v-for="(wp,key) in wps" :key="key">
-            <view class="w">
+            <view class="w" @click="linkxq(wp.id)">
               <view class="tt">
                 <view class="fle" style="opacity:1">
                   <view class="time">{{time(wp.createtime,1)}}</view>
@@ -37,7 +37,7 @@
         </view>
         <view>
           <view class="box_" v-for="(ps,key) in psz" :key="key">
-            <view class="w">
+            <view class="w"  @click="linkxq(ps.id)">
               <view class="tt">
                 <view class="fle" style="opacity:0.5">
                   <view class="time">{{time(ps.createtime,1)}}</view>
@@ -60,7 +60,7 @@
         </view>
         <view v-else>
           <view class="box_" v-for="(ddwz,key) in wcdds" :key="key">
-            <view class="w">
+            <view class="w"  @click="linkxq(ddwz.id)">
               <view class="tt">
                 <view class="fle" style="opacity:0.3">
                   <view class="time">{{time(ddwz.createtime,1)}}</view>
@@ -99,7 +99,7 @@ export default {
       p: 1,
       wcdds: "",
       wps: "",
-      pagesize: 3,
+      pagesize: 10,
       haiyouma: true,
       psz: ""
     };
@@ -129,6 +129,11 @@ export default {
     }
   },
   methods: {
+    linkxq(id) {
+      uni.navigateTo({
+        url: "/pages/Dingdan/content?id=" + id
+      });
+    },
     time(val, n) {
       var time = new Date(parseInt(val) * 1000);
       var y = time.getFullYear(); //getFullYear方法以四位数字返回年份

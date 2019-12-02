@@ -81,6 +81,12 @@
 					"navigationBarBackgroundColor": "#FFFFFF",
 					"navigationBarTextStyle": "black"
 			}
+        },
+	    {
+            "path" : "pages/Dingdan/content",
+            "style" : {
+					"navigationBarTitleText": "订单详情"
+			}
         }
 	],
 	"globalStyle": {

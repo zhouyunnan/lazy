@@ -233,7 +233,7 @@ export default {
   line-height: 200rpx;
   color: white;
   font-size: 34rpx;
-  background: radial-gradient(circle at top, #dfdfdf, #868686, #707070);
+  background: radial-gradient(circle at top, #dfdfdf, #a0a0a0, #9c9c9c);
   bottom: 110rpx;
   left: 275rpx;
 }
