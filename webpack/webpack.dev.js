@@ -35,7 +35,7 @@ module.exports = merge(common, {
         hot: true,
         proxy: {
             '/api': {
-                target: 'http://127.0.0.1',
+                target: 'https://api.doudianwang.com/lazy',
                 changeOrigin: true,// target是域名的话，需要这个参数，
                 ws: true, //是否代理
                 pathRewrite: { //将开头的api除掉  路径重写

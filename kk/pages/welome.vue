@@ -12,8 +12,7 @@ export default {
   data() {
     return {};
   },
-  onLoad() {
-    //清理缓存
+  onShow() {
     try {
       uni.clearStorageSync();
       uni.clearStorage();
