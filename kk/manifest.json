@@ -78,5 +78,12 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "mp-qq" : {
+        "setting" : {
+            "es6" : true,
+            "urlCheck" : false
+        },
+        "appid" : "1110094076"
     }
 }
