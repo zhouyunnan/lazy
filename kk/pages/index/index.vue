@@ -221,7 +221,7 @@ export default {
   color: white;
   font-size: 34rpx;
   background: radial-gradient(circle at top, #ff507d, #ff81a0, #e90941);
-  bottom: 110rpx;
+  bottom: 100rpx;
   left: 275rpx;
 }
 .xiadan2 {
@@ -233,8 +233,8 @@ export default {
   line-height: 200rpx;
   color: white;
   font-size: 34rpx;
-  background: radial-gradient(circle at top, #dfdfdf, #a0a0a0, #9c9c9c);
-  bottom: 110rpx;
+  background: radial-gradient(circle at top, #929292, #a0a0a0, #9c9c9c);
+  bottom: 100rpx;
   left: 275rpx;
 }
 </style>

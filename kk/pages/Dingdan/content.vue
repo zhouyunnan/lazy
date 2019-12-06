@@ -11,6 +11,10 @@
         <view class="msg">{{dddata.out_trade_no}}</view>
       </view>
       <view class="text_box">
+        <view class="tit">承送人:</view>
+        <view class="msg">{{paonan}}</view>
+      </view>
+      <view class="text_box">
         <view class="tit">收货人</view>
         <view class="msg">
           {{dddata.shouhuoren}}
@@ -48,7 +52,8 @@ export default {
     return {
       ddid: "",
       dddata: "",
-      ndata: ""
+      ndata: "",
+      paonan:""
     };
   },
   components: {
@@ -65,6 +70,29 @@ export default {
     }
   },
   methods: {
+	getschool(val){
+		  uni.request({
+        method: "POST",
+        url: this.myconfig.url + "index.php/home/xrunman/find_byid",
+        data: {
+          school_id: val
+        },
+        header: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          Cookie: uni.getStorageSync("sessionid")
+        },
+        success: ret=>{
+            this.paonan = ret.data.content['schoolname'];
+        },
+        fail() {
+          uni.showToast({
+            title: "网络错误",
+            icon: "none",
+            duration: 1400
+          });
+        }
+      }); 
+	},
     getdd() {
       uni.request({
         method: "POST",
@@ -82,6 +110,7 @@ export default {
             let content = re.content;
             let arr = [];
             let obj = Object.create({});
+            this.getschool(content['schoolid']);
             for (let c in content) {
               if (!this.myconfig.isnull(content[c])) {
                 if (
