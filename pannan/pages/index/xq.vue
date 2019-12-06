@@ -28,7 +28,7 @@
 				<view class="msg">{{ dd.val }}</view>
 			</view>
 		</view>
-		<view class="qrbtn">
+		<view class="qrbtn"  v-if="dddata.tz != 'quxiao'">
 			<view class="xx">
 				<view><text @click="fh()">返回上一页</text></view>
 			</view>
@@ -40,7 +40,6 @@
 				<view class="btn" v-if="array.length > 1"><picker @change="bindPickerChange2" :value="index" :range="array">已配送</picker></view>
 				<view class="btn" @click="wancle()" v-else>已配送</view>
 			</view>
-
 			<view v-if="dddata.wanchengtime != '0'"><view class="btn2">已结束</view></view>
 		</view>
 	</view>
