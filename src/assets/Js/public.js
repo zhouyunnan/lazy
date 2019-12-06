@@ -29,7 +29,19 @@ export default {
         },
         {
           name: "获取店铺二维码",
-          link: "phb"
+          link: "getewm"
+        },
+      ]
+    },
+    {
+      name: "订单管理",
+      icon: "iconfont icon-6",
+      isopen: false,
+      height: 0,
+      second: [
+        {
+          name: "今日订单",
+          link: "today"
         },
       ]
     },

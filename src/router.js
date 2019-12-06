@@ -44,6 +44,16 @@ let router = new Router({
           name: 'sheup_biaodan',
           component: () => import('./views/Shezhi/biaodan.vue'),
         },
+        {
+          path: '/getewm',
+          name: 'getewm',
+          component: () => import('./views/Shezhi/ewm.vue'),
+        },
+        {
+          path: '/today',
+          name: 'today',
+          component: () => import('./views/Dingdan/today.vue'),
+        },
       ],
       //是否需要登陆授权
       meta: { requiresAuth: true }
