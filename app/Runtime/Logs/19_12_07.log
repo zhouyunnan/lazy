@@ -1,0 +1,135 @@
+[ 2019-12-07T07:01:44+08:00 ] 223.166.222.103 /lazy/index.php/home/xlogin/sess
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001492s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001361s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001403s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001695s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001753s ]
+
+[ 2019-12-07T07:01:45+08:00 ] 223.166.222.105 /lazy/index.php/home/xlogin/get_user_object?code=061K64eT1icKN41O97bT1md6eT1K64e5
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000300s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000405s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000445s ]
+NOTIC: [2] curl_error(): 25 is not a valid cURL handle resource /alidata/www/doudian/api/lazy/app/Home/Model/curlModel.class.php 第 50 行.
+SQL: DESCRIBE lazy_user_openid [ RunTime:0.000843s ]
+SQL: SELECT * FROM `lazy_user_openid` WHERE ( `openid` = 'ov0kp45Ivbg2Cupje5NBZTgV4SV0' ) LIMIT 1   [ RunTime:0.000444s ]
+SQL: INSERT INTO `lazy_user_openid` (`openid`,`time`,`md5openid`,`for`) VALUES ('ov0kp45Ivbg2Cupje5NBZTgV4SV0','2019-12-07 07:01:45','2822fe48e7680d1f9d2c2eddda01df81','WX') [ RunTime:0.026269s ]
+SQL: DESCRIBE lazy_user_userinfo [ RunTime:0.000739s ]
+SQL: SELECT * FROM `lazy_user_userinfo` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) LIMIT 1   [ RunTime:0.000403s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000533s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000662s ]
+
+[ 2019-12-07T07:01:46+08:00 ] 223.166.222.105 /lazy/index.php/home/xdingdan/getdd
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000282s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000340s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000381s ]
+SQL: DESCRIBE lazy_dingdan [ RunTime:0.000953s ]
+SQL: SELECT `id`,`createtime`,`shouhuodizhi`,`paisongtime`,`paisongtime`,`quhuohao` FROM `lazy_dingdan` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) AND ( `tz` = 'true' ) AND ( `paisongtime` = 0 ) AND ( `wanchengtime` = 0 ) ORDER BY id desc  [ RunTime:0.000298s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000422s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000464s ]
+
+[ 2019-12-07T07:01:48+08:00 ] 101.91.60.111 /lazy/index.php/home/xlogin/save_wz
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000408s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000457s ]
+SQL: DESCRIBE lazy_user_openid [ RunTime:0.000743s ]
+SQL: SELECT * FROM `lazy_user_openid` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) AND ( `city` = '广州市' ) AND ( `district` = '越秀区' ) LIMIT 1   [ RunTime:0.000320s ]
+SQL: UPDATE `lazy_user_openid` SET `city`='广州市',`district`='越秀区' WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) [ RunTime:0.006846s ]
+SQL: DESCRIBE lazy_running_man [ RunTime:0.000670s ]
+SQL: SELECT `id`,`schoolname` FROM `lazy_running_man` WHERE ( `city` = '广州市' )  [ RunTime:0.000280s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000424s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000477s ]
+
+[ 2019-12-07T07:02:13+08:00 ] 101.91.60.75 /lazy/index.php/home/xlogin/getschool_s
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000270s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000328s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000380s ]
+SQL: DESCRIBE lazy_running_man [ RunTime:0.000842s ]
+SQL: SELECT `id`,`schoolname` FROM `lazy_running_man`  [ RunTime:0.000203s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000452s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000497s ]
+
+[ 2019-12-07T07:02:25+08:00 ] 223.166.222.100 /lazy/index.php/home/xlogin/save_school
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000315s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000356s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000398s ]
+SQL: DESCRIBE lazy_user_openid [ RunTime:0.000762s ]
+SQL: SELECT * FROM `lazy_user_openid` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) AND ( `schoolid` = '1' ) LIMIT 1   [ RunTime:0.000271s ]
+SQL: UPDATE `lazy_user_openid` SET `schoolid`='1' WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) [ RunTime:0.004793s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000514s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000556s ]
+
+[ 2019-12-07T07:02:25+08:00 ] 223.166.222.107 /lazy/index.php/home/xrunman/find_byid
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000368s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000417s ]
+SQL: DESCRIBE lazy_running_man [ RunTime:0.000852s ]
+SQL: SELECT * FROM `lazy_running_man` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000223s ]
+
+[ 2019-12-07T07:02:37+08:00 ] 101.91.60.75 /lazy/index.php/home/xlogin/save_wz
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000343s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000353s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000403s ]
+SQL: DESCRIBE lazy_user_openid [ RunTime:0.000825s ]
+SQL: SELECT * FROM `lazy_user_openid` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) AND ( `city` = '广州市' ) AND ( `district` = '越秀区' ) LIMIT 1   [ RunTime:0.000275s ]
+SQL: DESCRIBE lazy_running_man [ RunTime:0.000526s ]
+SQL: SELECT `id`,`schoolname` FROM `lazy_running_man` WHERE ( `city` = '广州市' )  [ RunTime:0.000181s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000379s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000435s ]
+
+[ 2019-12-07T07:02:43+08:00 ] 223.166.222.107 /lazy/index.php/home/xrunman/find_byid
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000245s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000362s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000404s ]
+SQL: DESCRIBE lazy_running_man [ RunTime:0.000731s ]
+SQL: SELECT * FROM `lazy_running_man` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000259s ]
+
+[ 2019-12-07T07:03:00+08:00 ] 223.166.222.100 /lazy/index.php/home/xlogin/userinfo
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000270s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000381s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000422s ]
+SQL: DESCRIBE lazy_user_openid [ RunTime:0.000739s ]
+SQL: SELECT * FROM `lazy_user_openid` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) LIMIT 1   [ RunTime:0.000398s ]
+SQL: DESCRIBE lazy_user_userinfo [ RunTime:0.000503s ]
+SQL: SELECT * FROM `lazy_user_userinfo` WHERE ( `md5openid` = '2822fe48e7680d1f9d2c2eddda01df81' ) LIMIT 1   [ RunTime:0.000165s ]
+SQL: INSERT INTO `lazy_user_userinfo` (`openid`,`avatarUrl`,`nickName`,`time`,`md5openid`) VALUES ('ov0kp45Ivbg2Cupje5NBZTgV4SV0','https://wx.qlogo.cn/mmhead/AV7HfW2bsiauQBVOicrlfrXdWlegDsGNtAqvMnEic3CPia4/132','陈佳信','2019-12-07 07:03:00','2822fe48e7680d1f9d2c2eddda01df81') [ RunTime:0.005397s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000553s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000600s ]
+
