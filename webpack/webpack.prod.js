@@ -45,6 +45,7 @@ module.exports = merge(common, {
                         options: {
                             name: '[path][name].[ext]',
                             outputPath: 'img',
+                            // publicPath: "./img"   这个不能要，会影响MiniCssExtractPlugin.loader的
                         }
                     }
                 ]
