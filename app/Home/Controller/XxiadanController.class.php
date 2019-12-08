@@ -185,7 +185,7 @@ class XxiadanController extends Controller {
     private function send_sms($phone){
         $data = array(
             'phone'=>$phone,
-            "SignName"=>"兜点网",
+            "SignName"=>"懒癌患者拯救联盟",
             "TemplateCode"=>"SMS_178766286",
             // "pot_data"=> json_encode(
             //     array(

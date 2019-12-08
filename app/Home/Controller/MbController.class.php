@@ -225,7 +225,7 @@ class MbController extends Controller {
         }else{
             $data = array(
                 'phone'=>$phone,
-                "SignName"=>"兜点网",
+                "SignName"=>"懒癌患者拯救联盟",
                 "TemplateCode"=>"SMS_179155498"
             );
             $res = $this->http_curl('http://www.doudianwang.com/API/sms/index.php','post','json',$data);
