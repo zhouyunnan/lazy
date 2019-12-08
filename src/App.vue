@@ -6,6 +6,7 @@
 <script>
 </script>
 <style lang="scss" >
+  @import './assets/css/font.css';
 body,
 ol,
 ul,

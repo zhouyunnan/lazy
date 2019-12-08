@@ -21,14 +21,6 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: "css/[name][chunkhash].css",
         }),
-        //构建性能分析表
-        new StatsWriterPlugin({
-            fields: null,
-            stats: { chunkModules: true }
-        }),
-        new Visualizer({
-            filename: './statistics.html'
-        })
     ],
     module: {
         rules: [
@@ -38,7 +30,7 @@ module.exports = merge(common, {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            publicPath:"../../"
+                            publicPath: "../"
                         },
                     },
                     'css-loader',
@@ -52,8 +44,7 @@ module.exports = merge(common, {
                         loader: 'file-loader',
                         options: {
                             name: '[path][name].[ext]',
-                            outputPath: 'img/',
-                            publicPath: 'img/'
+                            outputPath: 'img',
                         }
                     }
                 ]
