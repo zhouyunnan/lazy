@@ -10,9 +10,9 @@ var MiniCssExtractPlugin = require('mini-css-extract-plugin'); //css提取
 
 module.exports = merge(common, {
     output: {
-        publicPath:"./",
+        publicPath: "./",
         filename: 'js/[name]-[chunkhash].js',
-        path: path.resolve(__dirname, '../dists')
+        path: path.resolve(__dirname, '../dist')
     },
     mode: 'production',
     plugins: [
@@ -35,7 +35,12 @@ module.exports = merge(common, {
             {
                 test: /\.(scss|css)$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath:"../../"
+                        },
+                    },
                     'css-loader',
                     'sass-loader'
                 ]
