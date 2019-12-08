@@ -70,7 +70,7 @@
           <el-table-column prop="createtime" label="下单时间" sortable width="120"></el-table-column>
           <el-table-column prop="paisongtime" label="取件时间" sortable width="120"></el-table-column>
           <el-table-column prop="wanchengtime" label="完成时间" sortable width="160"></el-table-column>
-          <el-table-column prop="tz" label="订单状态" sortable width="160"></el-table-column>
+          <el-table-column prop="tz" label="订单状态" sortable width="80"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button type="text" icon="el-icon-tickets" size="small" @click="find(scope.row)">查看</el-button>
