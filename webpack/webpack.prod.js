@@ -12,7 +12,7 @@ module.exports = merge(common, {
     output: {
         publicPath:"./",
         filename: 'js/[name]-[chunkhash].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dists')
     },
     mode: 'production',
     plugins: [
@@ -48,7 +48,7 @@ module.exports = merge(common, {
                         options: {
                             name: '[path][name].[ext]',
                             outputPath: 'img/',
-                            publicPath: '../img/'
+                            publicPath: 'img/'
                         }
                     }
                 ]

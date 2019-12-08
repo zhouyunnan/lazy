@@ -280,6 +280,7 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
 }
 .pub_right_header {
   position: relative;

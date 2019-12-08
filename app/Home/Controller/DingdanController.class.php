@@ -19,7 +19,7 @@ class DingdanController extends Controller {
         $year=date("Y-m-d");
         $t = strtotime($year);
 
-        // $map['createtime']  = array('gt', $t);
+        $map['createtime']  = array('gt', $t);
         $map['schoolid']  = session("runningMan");
         $map['tz']  = array('neq', "false");
         
@@ -56,5 +56,49 @@ class DingdanController extends Controller {
             ));
             exit();
            }
+    }
+
+    //查询订单派送学信息
+    public function ddpsxx(){
+        $table = M("ddcz");
+        $map = array(
+            "ddid"=>I('post.id'),
+        );
+        $res = $table->where($map)->select();
+        echo json_encode(array(
+            "result" => true,
+            "lists"=>$res
+        ));
+        exit();
+    }
+
+    //历史总订单
+    public function geralldd(){
+        $tabld_dd = M("dingdan");
+
+        $page = I('post.p');
+        $num = I('post.pagesize');
+        $begin = ($page-1)*$num;
+
+        
+
+        $map['schoolid']  = session("runningMan");
+        $map['tz']  = array('neq', "false");
+        $res = $tabld_dd->where($map)->order("id desc")->limit($begin,$num)->select();
+        $count = $tabld_dd->where($map)->count();
+       
+       if($res){
+        echo json_encode(array(
+            "result" => true,
+            "lists"=>$res,
+            "count"=>$count
+        ));
+        exit();
+       }else{
+        echo json_encode(array(
+            "result" => false,
+        ));
+        exit();
+       }
     }
 }

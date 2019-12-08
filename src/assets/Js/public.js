@@ -43,6 +43,10 @@ export default {
           name: "今日订单",
           link: "today"
         },
+        {
+          name: "历史订单",
+          link: "order"
+        },
       ]
     },
   ],

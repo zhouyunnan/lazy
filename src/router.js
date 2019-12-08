@@ -54,6 +54,11 @@ let router = new Router({
           name: 'today',
           component: () => import('./views/Dingdan/today.vue'),
         },
+        {
+          path: '/order',
+          name: 'order',
+          component: () => import('./views/Dingdan/order.vue'),
+        },
       ],
       //是否需要登陆授权
       meta: { requiresAuth: true }
